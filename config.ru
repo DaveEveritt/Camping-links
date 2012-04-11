@@ -1,0 +1,2 @@
+require 'camplinks'
+run Camplinks

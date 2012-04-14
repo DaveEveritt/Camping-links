@@ -19,14 +19,6 @@ module Camplinks
       end
     end
 
-    class Style < R '/styles.css'
-      STYLE = File.read(__FILE__).gsub(/.*__END__/m, '')
-      def get
-        @headers['Content-Type'] = 'text/css; charset=utf-8'
-        STYLE
-      end
-    end
-  
     class Static < R '/(.+)'
       MIME_TYPES = {
         # '.html' => 'text/html',
@@ -225,6 +217,7 @@ module Camplinks
 end
 
 __END__
+@@/styles.css
 * {
   margin:0;
   padding:0;

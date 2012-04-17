@@ -54,7 +54,7 @@ module Camplinks
       
       def envars(theenv)
         ul do
-          if theenv == 'ENV' # fails to print the next line??
+          if theenv == ENV # fails to print the next line but shows non-Rack vars??
             p "#{theenv} - Environment variables available to Ruby:"
             theenv.each_pair do |name,value|
               li { name + " " + value }
@@ -113,7 +113,7 @@ module Camplinks
 #                   filename2 = ENV['SCRIPT_NAME'].scan(/\w+\.\w+$/)
 #                   p { "Script name: #{filename2}" }
 #                   envars(ENV)
-#                   envars(env)
+#                   envars(@env)
                 } # end twiddle div
               end
               
@@ -142,7 +142,7 @@ module Camplinks
         makelist(links_o) # has to go after each list, not at end of index view
 
         h2 'Other useful Camping links:'
-        p {"These need to be concatenated (I love that word) with the ones on the " + a("Camping Wiki", :href => "https://github.com/camping/camping/wiki/Miscellaneous-Camping-links") }
+        p {"These need to be sorted (hosting, databases...) and concatenated (love that word) with those at " + a("Camping Wiki", :href => "https://github.com/camping/camping/wiki/Miscellaneous-Camping-links") }
         links_u = {
           'Running Camping apps on Heroku' => 'http://radiant-sunset-95.heroku.com/how-to-run-camping-2-apps-on-heroku',
           'Camping 2.0 on cgi/fcgi' => 'http://pastie.org/237138', #http://osdir.com/ml/lang.ruby.camping.general/2008-07/msg00029.html
@@ -151,11 +151,15 @@ module Camplinks
           'Markaby docs' => 'http://markaby.rubyforge.org/',
           'Original post re Camping\'s move to Rack' => 'http://www.mail-archive.com/camping-list@rubyforge.org/msg00764.html',
           'Implementing Ruby Camping REST Services With RESTstop (Philippe Monet)' => 'http://blog.monnet-usa.com/?p=298',
+          'CouchCamping (gem) CouchDB as the database layer in Camping!' => 'https://www.ruby-toolbox.com/gems/CouchCamping',
+          'Set up your Camping app to run on Dreamhost' => 'http://wiki.dreamhost.com/Camping',
           'Camping compared with Sinatra' => 'http://stackoverflow.com/questions/795727/are-there-any-important-differences-between-camping-and-sinatra',
           "(PRE 2) Jeremy McAnally's 'Going Camping' slides from GoRuCo 07" => "http://slideshow.rubyforge.org/camping.html#1",
           '(PRE-2) Wild and Crazy Metaprogramming with Camping' => 'http://www.oreillynet.com/ruby/blog/2006/06/wild_and_crazy_metaprogramming.html',
           '(PRE-2) Camping and mysql (from Snax)' => 'http://blog.evanweaver.com/articles/2006/09/17/make-camping-connect-to-mysql/',
           '(PRE-2) Camping screencasts' => 'http://www.techscreencast.com/web-development/ruby-on-rails/camping-a-microframework-for-ruby/326',
+          '(PRE-2) Introduction to Camping (PDF, Brisbane RubyUG 2007, John Jeffery)' => 'http://files.meetup.com/280030/Introduction%20to%20Camping.pdf',
+          '(PRE-2) Polzr.goes :Camping (2007)' => 'http://polzr.blogspot.co.uk/',
         }
         makelist(links_u)
 
@@ -204,6 +208,7 @@ module Camplinks
         links_l = {
           'Cheat - local/remote command-line cheat sheets (Chris Wanstrath)' => 'http://cheat.errtheblog.com/',
           'More about Cheat (blog post)' => 'http://errtheblog.com/posts/91-the-best-of-cheat',
+          'Knockout.js tutorial files and demo (Philippe Monet)' => 'http://savings-goal-simulator.herokuapp.com/',
           'My Skills Map (Philippe Monet)' => 'http://www.myskillsmap.com/',
           'Hurl it - demo and debug APIs (Chris Wanstrath and Leah Culver)' => 'http://hurl.it/',
           '(PRE 2?) tippy tippy tepee: Camping-based sandboxed scriptable wiki' => 'https://github.com/parolkar/why_sandbox/tree/master/examples/tippytippytepee',

@@ -47,7 +47,7 @@ module Camplinks
       def makelist(links) # throws a hash of links into a ul in no discernable order
         ul.thelinks do
           links.each_pair do |label,link|
-            li { a label, :href => link }
+            li { a(:href => link) { label } }
           end
         end
       end
@@ -86,8 +86,8 @@ module Camplinks
           end
           body { div.container {
               ul :id => 'menu' do
-                  ['Camping links', '/', 'Databases and Camping', '/databases', 'Sites using Camping', '/sites'].each_slice(2) do |label,link|
-                      li { a label, :href => link }
+                  ['Camping misc. links', '/', 'Databases and hosting', '/databases', 'Sites using Camping', '/sites'].each_slice(2) do |label,link|
+                      li { a label, :href => link, :class => 'here' }
                   end
               end
               self << yield # inserts partials
@@ -120,69 +120,54 @@ module Camplinks
                 } # end twiddle div
               end
               
-              p.footer { a('Camping', :href => 'https://github.com/camping/camping/') + ' is a small but almost perfect Ruby framework originally created by ' + a('_why', :href => 'http://viewsourcecode.org/why/') + ' and now under active development.<br>This? A single-file database-free Camping app in a few hundred lines including CSS and content. Can be used for quick wireframe mockups. Source code is ' + a ('on GitHub', :href => 'https://github.com/DaveEveritt/Camping-links') }
+              p.footer { 
+                  a('Camping', :href => 'https://github.com/camping/camping/') + ' is a small but almost perfect Ruby framework originally created by ' + a('_why', :href => 'http://viewsourcecode.org/why/') + ' and now under active development.<br>
+                  This? A monofile db-free Camping app (inspired by ' + a('this snippet', :href => 'http://snippets.dzone.com/posts/show/1781') + ' in a few hundred lines including CSS and content. Also good for quick wireframe mockups. ' + a ('Source code on GitHub', :href => 'https://github.com/DaveEveritt/Camping-links')
+              }
             }} # end body and container div
           end
       end
 
       # The 'index' partial view:
       def index
+      
         @str = "home"
         h1 'Camping framework links'
-        p {'This plain-styled block-ugly site is ' + a('my own', :href => 'http://daveeveritt.org/bio.html') + ' collection of links collected during previous versions of Camping, presented here for ' + strong('checking and updating') + " and (after that) maintaining. " + strong('Note:') + " code in those marked 'PRE 2' might need updating, or might still work. Anyway, I'd better get to work and look up all the ones I haven't checked yet..."}
+        p {'This plain-styled block-ugly site is ' + a('my own', :href => 'http://daveeveritt.org/bio.html') + ' collection of links collected during previous versions of Camping, presented here for ' + strong('checking and updating') + " and (after that) maintaining. " + strong('Note:') + " code in those marked 'PRE 2' " + em('might') + " still work. Soil background by " + a('Bluebie', :href => 'http://creativepony.com/') + '.'}
 
         h2 "'Official' Camping links:"
         links_o = { # should really convert to array to keep in order although Ruby 1.9 is supposed to do this?
           'Main Camping website' => 'http://camping.io',
-          'Magnus Holm (Judofyr) - Camping master' => 'http://github.com/camping/camping/',
-          'Main Camping website (outdated)' => 'http://camping.rubyforge.org/',
+          'Camping website (RubyForge, outdated)' => 'http://camping.rubyforge.org/',
+          'Camping master - Magnus Holm (Judofyr)' => 'http://github.com/camping/camping/',
           'Markup as Ruby: mab - with handy reference (Github)' => 'https://github.com/camping/mab',
           'Camping, the Reference' => 'http://camping.rubyforge.org/api.html',
           'The Camping mailing list archive' => 'http://www.mail-archive.com/camping-list@rubyforge.org/',
-          'Magnus Holm (Judofyr) - Camping source unabridged (for comments and source code)' => 'https://github.com/camping/camping/blob/master/lib/camping-unabridged.rb',
+          'Camping source unabridged (for comments and source code) - Magnus Holm (Judofyr)' => 'https://github.com/camping/camping/blob/master/lib/camping-unabridged.rb',
           'Serving static files/pages' => 'https://github.com/judofyr/camping/wiki/Serving-Static-Files',
-          'OpenID Authentication in Camping (Judofyr)' => 'https://github.com/judofyr/camping/wiki/openid-authentication',
+          'OpenID Authentication in Camping - Magnus Holm  (Judofyr)' => 'https://github.com/judofyr/camping/wiki/openid-authentication',
           '(needs update) Camping blog example' => 'https://github.com/camping/camping/blob/master/examples/blog.rb',
           '_why\'s 1.4.2 release notes' => 'http://rubyforge.org/pipermail/camping-list/2006-May.txt',
         }
         makelist(links_o) # has to go after each list, not at end of index view
 
-        h2 'Other useful Camping links:'
-        p {"These need to be sorted (hosting, app examples, plugin-type thingies...) and concatenated (love that word) with those at " + a("Camping Wiki", :href => "https://github.com/camping/camping/wiki/Miscellaneous-Camping-links") }
-        links_u = {
-          'Magnus Holm (Judofyr) - Six (unimpressive) reasons Camping is better than you would imagine' => 'http://librelist.com/browser//hacketyhack/2010/7/20/on-camping-vs-sinatra/',
-          'Running Camping apps on Heroku' => 'http://radiant-sunset-95.heroku.com/how-to-run-camping-2-apps-on-heroku',
-          'Camping 2.0 on cgi/fcgi' => 'http://pastie.org/237138', #http://osdir.com/ml/lang.ruby.camping.general/2008-07/msg00029.html
-          'Blog example on Heroku' => 'http://radiant-sunset-95.heroku.com',
-          'Original inspration for this Camping app' => 'http://snippets.dzone.com/posts/show/1781',
-          'Markaby docs' => 'http://markaby.rubyforge.org/',
-          'Original post re Camping\'s move to Rack' => 'http://www.mail-archive.com/camping-list@rubyforge.org/msg00764.html',
-          'Implementing Ruby Camping REST Services With RESTstop (Philippe Monet)' => 'http://blog.monnet-usa.com/?p=298',
-          'Set up your Camping app to run on Dreamhost' => 'http://wiki.dreamhost.com/Camping',
-          'Camping compared with Sinatra' => 'http://stackoverflow.com/questions/795727/are-there-any-important-differences-between-camping-and-sinatra',
-          'A/B Test Your Camping App Using ABingo (Philippe Monnet)' => 'http://blog.monnet-usa.com/?cat=28',
-          '(PRE 2?) Sleeping Bag: Rails-style REST resource controllers in your Camping app' => 'http://code.google.com/p/sleepingbag/',
-          '(PRE 2) Parasite: brings generators, environments, and other Rails-y goodness to the world of Camping app development' => 'http://parasite.rubyforge.org/',
-          '(PRE 2?) TentSteak: a meaty extension for Camping seasoned with Markaby helper methods, stylesheet management, and bootstrappy goodness.' => 'http://tentsteak.rubyforge.org/',
-          '(PRE 2) Going off the Rail with Camping (slides, RailsConf Europe 2006 by Eleanor McHugh + Romek Szczesniak)' => 'http://www.slideshare.net/feyeleanor/camping-going-off-the-rails-with-ruby',
-          '(PRE 2) Introductory talk on Camping (slides, Ruby User Group Berlin 2007, Gregor Schmidt)' => 'http://www.slideshare.net/schmidt/camping-126337',
-          '(PRE 2) Ruby + Thin + Camping : Serving static files with Thin vs. Camping’s work around' => 'http://www.eleven33.com/2009/03/ruby-thin-camping-serving-static-files-with-thin-vs-campings-work-around/',
-          "(PRE 2) Jeremy McAnally's 'Going Camping' slides from GoRuCo 07" => "http://slideshow.rubyforge.org/camping.html#1",
-          '(PRE-2) Wild and Crazy Metaprogramming with Camping' => 'http://www.oreillynet.com/ruby/blog/2006/06/wild_and_crazy_metaprogramming.html',
-          '(PRE-2) Camping screencasts' => 'http://www.techscreencast.com/web-development/ruby-on-rails/camping-a-microframework-for-ruby/326',
-          '(PRE-2) Introduction to Camping (PDF, Brisbane RubyUG 2007, John Jeffery)' => 'http://files.meetup.com/280030/Introduction%20to%20Camping.pdf',
-          '(PRE-2) Polzr.goes :Camping (2007)' => 'http://polzr.blogspot.co.uk/',
-        }
-        makelist(links_u)
-
         h2 'Testing for Camping:'
         links_t = {
-          'Mosquito (GitHub)' => 'https://github.com/topfunky/mosquito/',
+          '<strong>Mosquito</strong> (GitHub)' => 'https://github.com/topfunky/mosquito/',
           'Mosquito docs (Geoffrey Grosenbach): unit and functional tests on Camping models and controllers' => 'http://mosquito.rubyforge.org/',
-          'Magnus Holm (Judofyr) - Camping testing framework' => 'http://github.com/judofyr/camping-test/tree/master',
-          '(Abandoned?) Test-unit (Geoffrey Grosenbach): Mosquito-based testing in the style of Test::Unit' => 'http://rubyforge.org/projects/testcamp',
+          'Camping testing framework - Magnus Holm (Judofyr)' => 'http://github.com/judofyr/camping-test/tree/master',
+          '(Abandoned?) <strong>Test-unit</strong> (Geoffrey Grosenbach): Mosquito-based testing in the style of Test::Unit' => 'http://rubyforge.org/projects/testcamp',
         }
         makelist(links_t)
+
+        h2 'Extensions, wrappers, etc. for Camping:'
+        links_w = {
+          '<strong>Picnic</strong> - install a Camping app as a gem, and run it as a Linux service (almost) right out of the box (Matt Zukowski 2010)' => 'http://code.google.com/p/camping-picnic/',
+          '(PRE 2?) <strong>Sleeping Bag</strong>: Rails-style REST resource controllers in your Camping app' => 'http://code.google.com/p/sleepingbag/',
+          '(PRE 2) <strong>Parasite</strong>: brings generators, environments, and other Rails-y goodness to the world of Camping app development' => 'http://parasite.rubyforge.org/',
+          '(PRE 2?) <strong>TentSteak</strong>: a meaty extension for Camping seasoned with Markaby helper methods, stylesheet management, and bootstrappy goodness.' => 'http://tentsteak.rubyforge.org/',
+        }
+        makelist(links_w)
 
         h2 'Using JRuby and Camping:'
         links_j = {
@@ -192,24 +177,35 @@ module Camplinks
         }
         makelist(links_j)
 
-        h2 'Miscellaneous stuff I haven\'t checked yet:'
-        links_l = {
-          'Ruby, Ubuntu and Apache etc.' => 'https://help.ubuntu.com/community/RubyOnRails#Apache',
-          'Open ID authentication' => 'http://wiki.github.com/why/camping/openid-authentication',
-          'Picnic: Linux and gem-friendly Camping' => 'http://code.google.com/p/camping-picnic/wiki/PicnicTutorial',
-          'optional multi-pane layout' => 'http://www.mail-archive.com/camping-list@rubyforge.org/msg00676.html',
-          'ActiveRecord table definition' => 'http://api.rubyonrails.org/classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#M000759'
+        h2 'Other useful Camping links:'
+        p {"These need to be sorted and concatenated (love that word) with those at " + a("Camping Wiki", :href => "https://github.com/camping/camping/wiki/Miscellaneous-Camping-links") }
+        links_u = {
+          'Six (unimpressive) reasons Camping is better than you would imagine - Magnus Holm (Judofyr)' => 'http://librelist.com/browser//hacketyhack/2010/7/20/on-camping-vs-sinatra/',
+          'Markaby docs' => 'http://markaby.rubyforge.org/',
+          'Implementing Ruby Camping REST Services With <strong>RESTstop</strong> (Philippe Monet)' => 'http://blog.monnet-usa.com/?p=298',
+          'Camping compared with Sinatra' => 'http://stackoverflow.com/questions/795727/are-there-any-important-differences-between-camping-and-sinatra',
+          '<strong>ABingo</strong>: <dfn title="Test two kinds of user interface in one app">A/B Test</dfn> Your Camping App (Philippe Monnet)' => 'http://blog.monnet-usa.com/?cat=28',
+          'optional multi-pane layout (snippet, Zimbatm' => 'http://www.mail-archive.com/camping-list@rubyforge.org/msg00676.html',
+          '(PRE 2) Going off the Rails with Camping (slides, RailsConf Europe 2006 by Eleanor McHugh + Romek Szczesniak)' => 'http://www.slideshare.net/feyeleanor/camping-going-off-the-rails-with-ruby',
+          '(PRE 2) Introductory talk on Camping (slides, Ruby User Group Berlin 2007, Gregor Schmidt)' => 'http://www.slideshare.net/schmidt/camping-126337',
+          "(PRE 2) Jeremy McAnally's 'Going Camping' slides from GoRuCo 07" => "http://slideshow.rubyforge.org/camping.html#1",
+          '(PRE-2) Wild and Crazy Metaprogramming with Camping' => 'http://www.oreillynet.com/ruby/blog/2006/06/wild_and_crazy_metaprogramming.html',
+          '(PRE-2) Camping screencasts' => 'http://www.techscreencast.com/web-development/ruby-on-rails/camping-a-microframework-for-ruby/326',
+          '(PRE-2) Introduction to Camping (PDF, Brisbane RubyUG 2007, John Jeffery)' => 'http://files.meetup.com/280030/Introduction%20to%20Camping.pdf',
+          '(PRE-2) Polzr.goes :Camping (2007)' => 'http://polzr.blogspot.co.uk/',
         }
-        makelist(links_l)
+        makelist(links_u)
 
       end
 
       # The 'databases' partial view:
       def databases
-        @str = "databases and Camping"
-        h1 'Camping and databases: ' + @str
-        p "Lots of choice, SQLite is the default, Active Record the default ORM."
+      
+        @str = "databases and deployment"
+        h1 'Camping: ' + @str
+
         h2 'Resources for Camping and databases:'
+        p "Lots of choice, SQLite is the default, Active Record the default ORM."
         links_d = {
           'CouchCamping (gem) CouchDB as the database layer in Camping!' => 'https://www.ruby-toolbox.com/gems/CouchCamping',
           'chill plugs ruby code in to CouchDB (Bluebie)' => 'https://github.com/Bluebie/chill',
@@ -217,8 +213,21 @@ module Camplinks
           'Going Camping with CouchDB On OS X Tiger (Tim Gittos)' => 'http://www.timgittos.com/archives/going-camping-with-couchdb-on-os-x-tiger/',
           'Camping::Kirbybase a gem for using Kirbybase with Camping (Isak Andersson)' => 'https://github.com/MilkshakePanda/camping-kirbybase',
           '(PRE-2) Camping and mysql (from Snax)' => 'http://blog.evanweaver.com/articles/2006/09/17/make-camping-connect-to-mysql/',
-       }
+        }
         makelist(links_d)
+
+        h2 'Camping deployment:'
+        p { "Servers, hosting" }
+        links_d = {
+          'Running Camping apps on Heroku' => 'http://radiant-sunset-95.heroku.com/how-to-run-camping-2-apps-on-heroku',
+          'Set up your Camping app to run on Dreamhost' => 'http://wiki.dreamhost.com/Camping',
+          'Camping 2.0 on cgi/fcgi' => 'http://pastie.org/237138', #http://osdir.com/ml/lang.ruby.camping.general/2008-07/msg00029.html
+          'Blog example on Heroku' => 'http://radiant-sunset-95.heroku.com',
+          'Original post re Camping\'s move to Rack' => 'http://www.mail-archive.com/camping-list@rubyforge.org/msg00764.html',
+          '(PRE 2) Ruby + Thin + Camping: Serving static files with Thin vs. Camping’s work around' => 'http://www.eleven33.com/2009/03/ruby-thin-camping-serving-static-files-with-thin-vs-campings-work-around/',
+        }
+        makelist(links_d)
+        
       end
 
       # The 'sites' partial view:
@@ -253,51 +262,67 @@ __END__
 body {
   font:normal 14px "Helvetica Neue", Helvetica, Tahoma, sans-serif;
   line-height:1.5;
-  background-color:#696;
+  background:#1d1410 url(soil.gif);
   color:#444;
 }
 .container {
   width:80%;
-  margin:1em auto 0px;
+  margin:1.24em auto 0px;
   padding:10px;
   border:1px solid #8b8;
-  background:#eee url(camping_bg.gif) 99% 44px no-repeat;
+  background:rgba(240,240,240,0.8) url(camping_bg.gif) 50% 48px no-repeat;
   border-radius:10px;
 }
 #menu {
   list-style-type:none;
   text-align:center;
+  margin-top:-2em;
 }
 #menu li {
   display:inline-block;
   width:33%;
   text-align:center;
-  margin:0 4px;
+  margin:0 4px 4px;
 }
 #menu > li {
   margin-left:0;
 }
 #menu li a {
   display:block;
+  line-height:2em;
   color:#fefefe;
-  background:#474;
+  background:rgba(68, 119, 68, 0.85);
   text-decoration:none;
-  padding:0.25em 0;
+  padding:0em 2px;
   letter-spacing:1px;
-  border-radius:6px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  -webkit-transition-property:all;
+  -moz-transition-property:all;
+  -ms-transition-property:all;
+  -o-transition-property:all;
+  transition-property:all;
+  -webkit-transition-duration:1s;
+  -moz-transition-duration:1s;
+  -ms-transition-duration:1s;
+  -o-transition-duration:1s;
+  transition-duration:1s;
 }
 #menu li a:hover {
-  display:block;
   color:#eee;
-  background:#696;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  background:rgba(68, 119, 68, 1);
+  text-shadow: 0px 2px 0px rgba(20, 20, 20, 0.5);
+  box-shadow: 0px 2px 0px rgba(20, 20, 20, 0.5);
+}
+#menu li a.here {
+  
 }
 h1, h2 {
   color:#363;
   text-shadow: 1px 1px 1px rgba(100, 100, 100, 0.6);
 }
 h1 {
-  margin:0.5em 0 0.25em;
+  margin:0.25em 0 0.25em;
   font-size:2em;
   text-align:center;
 }
@@ -305,6 +330,7 @@ h2 {
   font-size:1.2em;
   padding:0 0.25em 0.2em 0;
   margin:0.5em 0;
+  border-top:2px solid rgba(100, 100, 100, 0.2);
 }
 h1 + p {
   padding:0 10% 0.5em;
@@ -340,6 +366,9 @@ p a:hover {
 p a:link {
   text-decoration:underline;
 }
+dfn {
+  border-bottom:1px dotted #696;
+}
 .twiddle {
   margin-top:1.5em;
   padding:0.5em 1em 1em;
@@ -353,7 +382,7 @@ p a:link {
   background-color:#474;
   color:#fff;
   font-size:0.75em;
-  padding:0.25em;
+  padding:1em 0.25em;
   text-align:center;
   border-radius:6px;
 }

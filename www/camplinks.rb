@@ -209,7 +209,7 @@ module Camplinks
         @str = "databases and Camping"
         h1 'Camping and databases: ' + @str
         p "Lots of choice, SQLite is the default, Active Record the default ORM."
-        h2 'Articles on Camping and databases:'
+        h2 'Resources for Camping and databases:'
         links_d = {
           'CouchCamping (gem) CouchDB as the database layer in Camping!' => 'https://www.ruby-toolbox.com/gems/CouchCamping',
           'chill plugs ruby code in to CouchDB (Bluebie)' => 'https://github.com/Bluebie/chill',

@@ -5,6 +5,14 @@ Camping.goes :Camplinks
 
 module Camplinks
 
+  module Models
+        links_j = {
+          'Camping in jRuby' => 'https://github.com/camping/camping/wiki/Camping-in-jRuby',
+          '(PRE 2) JRuby Camping blog example' => 'http://docs.codehaus.org/display/JRUBY/The+JRuby+Tutorial+Part+2+-+Going+Camping',
+          '(PRE 2) Another JRuby blog, with a Camping fork on Github' => 'http://goeslightly.blogspot.com/2008/04/campdepict-jruby-cdk-and-camping.html',
+        }
+  end
+
   module Controllers
 
     class Index
@@ -87,7 +95,7 @@ module Camplinks
           body { div.container {
               ul :id => 'menu' do
                   ['Camping misc. links', '/', 'Databases and hosting', '/databases', 'Sites using Camping', '/sites'].each_slice(2) do |label,link|
-                      li { a label, :href => link, :class => 'here' }
+                      li { a label, :href => link } #, :class => 'here'
                   end
               end
               self << yield # inserts partials
@@ -133,7 +141,7 @@ module Camplinks
       
         @str = "home"
         h1 'Camping framework links'
-        p {'This plain-styled block-ugly site is ' + a('my own', :href => 'http://daveeveritt.org/bio.html') + ' collection of links collected during previous versions of Camping, presented here for ' + strong('checking and updating') + " and (after that) maintaining. " + strong('Note:') + " code in those marked 'PRE 2' " + em('might') + " still work. Soil background by " + a('Bluebie', :href => 'http://creativepony.com/') + '.'}
+        p {'This simple site is ' + a('my own', :href => 'http://daveeveritt.org/bio.html') + ' collection of links collected during previous versions of Camping, presented here for checking, updating and maintaining. ' + strong('Note:') + " code in those marked 'PRE 2' " + em('might') + " still work. Soil background by " + a('Bluebie', :href => 'http://creativepony.com/') + '.'}
 
         h2 "'Official' Camping links:"
         links_o = { # should really convert to array to keep in order although Ruby 1.9 is supposed to do this?
@@ -205,7 +213,7 @@ module Camplinks
         h1 'Camping: ' + @str
 
         h2 'Resources for Camping and databases:'
-        p "Lots of choice, SQLite is the default, Active Record the default ORM."
+        p { "Lots of choice, SQLite is the default, Active Record the default " + dfn("ORM", :title => "Object-Relational Mapper (SQL-free database interface)") + "." }
         links_d = {
           'CouchCamping (gem) CouchDB as the database layer in Camping!' => 'https://www.ruby-toolbox.com/gems/CouchCamping',
           'chill plugs ruby code in to CouchDB (Bluebie)' => 'https://github.com/Bluebie/chill',
@@ -290,8 +298,9 @@ body {
 #menu li a {
   display:block;
   line-height:2em;
-  color:#fefefe;
-  background:rgba(68, 119, 68, 0.85);
+  color:#ccc;
+  background:rgba(56, 37, 30, 0.90);
+/*  background:rgba(68, 119, 68, 0.85);*/
   text-decoration:none;
   padding:0em 2px;
   letter-spacing:1px;
@@ -309,10 +318,10 @@ body {
   transition-duration:1s;
 }
 #menu li a:hover {
-  color:#eee;
   background:rgba(68, 119, 68, 1);
-  text-shadow: 0px 2px 0px rgba(20, 20, 20, 0.5);
   box-shadow: 0px 2px 0px rgba(20, 20, 20, 0.5);
+  color:#fefefe;
+  text-shadow: 0px 2px 0px rgba(20, 20, 20, 0.5);
 }
 #menu li a.here {
   
@@ -367,7 +376,7 @@ p a:link {
   text-decoration:underline;
 }
 dfn {
-  border-bottom:1px dotted #696;
+  border-bottom:1px dotted #666;
 }
 .twiddle {
   margin-top:1.5em;

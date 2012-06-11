@@ -1,17 +1,9 @@
 require 'camping'
-#require 'enumerator' # to use each_slice in Ruby < 1.8.7
+#require 'enumerator' # enables each_slice in Ruby < 1.8.7
 
 Camping.goes :Camplinks
 
 module Camplinks
-
-  module Models
-        links_j = {
-          'Camping in jRuby' => 'https://github.com/camping/camping/wiki/Camping-in-jRuby',
-          '(PRE 2) JRuby Camping blog example' => 'http://docs.codehaus.org/display/JRUBY/The+JRuby+Tutorial+Part+2+-+Going+Camping',
-          '(PRE 2) Another JRuby blog, with a Camping fork on Github' => 'http://goeslightly.blogspot.com/2008/04/campdepict-jruby-cdk-and-camping.html',
-        }
-  end
 
   module Controllers
 
@@ -27,57 +19,57 @@ module Camplinks
       end
     end
 
-    class Static < R '/(.+)'
-      MIME_TYPES = {
-        # '.html' => 'text/html',
-        # '.css'  => 'text/css',
-        # '.js'   => 'text/javascript',
-        # '.png'  => 'image/png',
-        # '.jpg'  => 'image/jpeg',
-        '.gif'  => 'image/gif' # image loads without this?
-      }
-      PATH = "http://dave.camping.sh"
-      def get(path)
-        @headers['Content-Type'] = MIME_TYPES[path[/\.\w+$/, 0]] || "text/plain"
-        unless path.include? ".." # prevent directory traversal attacks
-          @headers['X-Sendfile'] = "/#{path}"
-        else
-          @status = "403"
-          "403 - Invalid path"
-        end
-      end
-    end
+#     class Static < R '/(.+)'
+#       MIME_TYPES = {
+#         # '.html' => 'text/html',
+#         # '.css'  => 'text/css',
+#         # '.js'   => 'text/javascript',
+#         # '.png'  => 'image/png',
+#         # '.jpg'  => 'image/jpeg',
+#         '.gif'  => 'image/gif' # image loads without this?
+#       }
+#       PATH = "http://dave.camping.sh"
+#       def get(path)
+#         @headers['Content-Type'] = MIME_TYPES[path[/\.\w+$/, 0]] || "text/plain"
+#         unless path.include? ".." # prevent directory traversal attacks
+#           @headers['X-Sendfile'] = "/#{path}"
+#         else
+#           @status = "403"
+#           "403 - Invalid path"
+#         end
+#       end
+#     end
 
   end
 
   module Helpers
 
-      def makelist(links) # throws a hash of links into a ul in no discernable order
-        ul.thelinks do
-          links.each_pair do |label,link|
-            li { a(:href => link) { label } }
-          end
+    def makelist(links) # throws a hash of links into a ul in no discernable order
+      ul.thelinks do
+        links.each_pair do |label,link|
+          li { a(:href => link) { label } }
         end
       end
-      
-      def envars(theenv) # displays environment vars if 'vars' query string added to URL
-        ul do
-          if theenv == ENV
-            li.emph "#{theenv} - non-Rack environment variables available to Ruby:"
-            theenv.each_pair do |name,value|
-              li { name + " " + value }
-            end
-          else
-            li.emph "@env (or env in Camping) - Rack environment variables:"
+    end
+    
+    def envars(theenv) # displays environment vars if 'vars' query string added to URL
+      ul do
+        if theenv == ENV
+          li.emph "#{theenv} - non-Rack environment variables available to Ruby:"
+          theenv.each_pair do |name,value|
+            li { name + " " + value }
+          end
+        else
+          li.emph "@env (or env in Camping) - Rack environment variables:"
 #             env.sort_by { |k, v| k.to_s }.each { |key, val|
 #               li { key + " " + value }
 #             }
-            theenv.each do |name|
-              li { name }
-            end
+          theenv.each do |name|
+            li { name }
           end
         end
       end
+    end
       
   end
 
@@ -288,9 +280,9 @@ body {
 }
 #menu li {
   display:inline-block;
-  width:33%;
+  width:32%;
   text-align:center;
-  margin:0 4px 4px;
+  margin:0 2px 4px;
 }
 #menu > li {
   margin-left:0;

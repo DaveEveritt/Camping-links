@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: normal 14px "Helvetica Neue", Helvetica, Tahoma, sans-serif;
+  line-height: 1.5;
+  background: #1d1410 url(soil.gif);
+  color: #444;
+}
+.container {
+  width: 80%;
+  margin: 1.24em auto 0px;
+  padding: 10px;
+  border: 1px solid #8b8;
+  background: rgba(240,240,240,0.8) url(camping_bg.gif) 50% 48px no-repeat;
+  border-radius: 10px;
+}
+#menu {
+  list-style-type: none;
+  text-align: center;
+  margin-top: -2em;
+}
+#menu li {
+  display: inline-block;
+  width: 32%;
+  text-align: center;
+  margin: 0 2px 4px;
+}
+#menu > li {
+  margin-left: 0;
+}
+#menu li a:link,
+#menu li a:visited {
+  display: block;
+  line-height: 2em;
+  color: #ccc;
+  background: rgba(56, 37, 30, 0.90);
+/*  background: rgba(68, 119, 68, 0.85);*/
+  text-decoration: none;
+  padding: 0em 2px;
+  letter-spacing: 1px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 1s;
+  -moz-transition-duration: 1s;
+  -ms-transition-duration: 1s;
+  -o-transition-duration: 1s;
+  transition-duration: 1s;
+}
+#menu li a:hover,
+#menu li a.here {
+  background: rgba(68, 119, 68, 1);
+  box-shadow: 0px 2px 0px rgba(20, 20, 20, 0.5);
+  color: #fefefe;
+  text-shadow: 0px 2px 0px rgba(20, 20, 20, 0.5);
+}
+h1, h2 {
+  color: #363;
+  text-shadow: 1px 1px 1px rgba(100, 100, 100, 0.6);
+}
+h1 {
+  margin: 0.25em 0 0.25em;
+  font-size: 2em;
+  text-align: center;
+}
+h2 {
+  font-size: 1.2em;
+  padding: 0 0.25em 0.2em 0;
+  margin: 0.5em 0;
+  border-top: 2px solid rgba(100, 100, 100, 0.2);
+}
+h1 + p {
+  padding: 0 10% 0.5em;
+  text-align: center;
+}
+h2 + p {
+  margin-top: -0.5em;
+}
+p + p,
+p + ul {
+  margin-top: 0.5em;
+}
+.thelinks {
+  margin-left: 40px;
+}
+.emph {
+  font-weight: bold;
+}
+a:link,
+.footer a:link,
+.footer a:visited {
+  color: #444;
+  text-decoration: none;
+}
+a:visited {
+  color: #666;
+}
+a:hover,
+p a:hover {
+  text-decoration: underline;
+  color: #111;
+}
+p a:link {
+  text-decoration: underline;
+}
+dfn {
+  border-bottom: 1px dotted #666;
+}
+.twiddle {
+  margin-top: 1.5em;
+  padding: 0.5em 1em 1em;
+  font-size: 80%;
+  border: 2px solid rgba(80,180,80,0.3);
+  background-color: rgba(200,200,200,0.35);
+  border-radius: 6px;
+}
+.footer {
+  margin-top: 1em;
+  background-color: #474;
+  color: #fff;
+  font-size: 0.75em;
+  padding: 1em 0.25em;
+  text-align: center;
+  border-radius: 6px;
+}
+.footer a:link,
+.footer a:visited {
+  color: #ada;
+}
+.footer a:hover {
+  color: white;
+}
